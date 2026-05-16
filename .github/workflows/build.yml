@@ -74,9 +74,9 @@ jobs:
           cd ..
       - name: Build & Push lancachenet/lancache-dns
         run: |
-          git clone https://github.com/lancachenet/lancache-dns.git
+          git clone -b ubuntu https://github.com/lancachenet/lancache-dns.git
           cd lancache-dns
-          sed -i '1cFROM ${{ secrets.DOCKER_USERNAME }}/lancachenet-ubuntu AS builder-dnstool' Dockerfile
+          sed -i '1cFROM ${{ secrets.DOCKER_USERNAME }}/lancachenet-ubuntu' Dockerfile
           cat Dockerfile
           docker buildx build --platform linux/arm/v7,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/lancachenet-lancache-dns --push .
           cd ..
